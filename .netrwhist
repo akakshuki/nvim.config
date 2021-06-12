@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/home/test_node/learning_python/session1'
+let g:netrw_dirhist_2='/home/test_node/learning_python/session1/admin_project'
+let g:netrw_dirhist_3='/home/test_node/learning_python/session1'
