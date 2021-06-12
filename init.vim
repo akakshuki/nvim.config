@@ -1,20 +1,17 @@
-for f in split(glob('~/.config/nvim/configs/*.vim'), '\n')
-   exe 'source' f
-   endfor
-" vim-bootstrap 2021-06-12 12:58:16
+" vim-bootstrap 2021-06-12 18:43:30
 
 "*****************************************************************************
 "" Vim-Plug core
 "*****************************************************************************
-let vimplug_exists=expand('~/./autoload/plug.vim')
+let vimplug_exists=expand('~/.config/nvim/autoload/plug.vim')
 if has('win32')&&!has('win64')
   let curl_exists=expand('C:\Windows\Sysnative\curl.exe')
 else
   let curl_exists=expand('curl')
 endif
 
-let g:vim_bootstrap_langs = "go,haskell,html,javascript,python,rust,typescript"
-let g:vim_bootstrap_editor = ""				" nvim or vim
+let g:vim_bootstrap_langs = "go,haskell,html,python,typescript"
+let g:vim_bootstrap_editor = "neovim"				" nvim or vim
 let g:vim_bootstrap_theme = "dracula"
 let g:vim_bootstrap_frams = "svelte,vuejs"
 
@@ -32,7 +29,7 @@ if !filereadable(vimplug_exists)
 endif
 
 " Required:
-call plug#begin(expand('~/./plugged'))
+call plug#begin(expand('~/.config/nvim/plugged'))
 
 "*****************************************************************************
 "" Plug install packages
@@ -87,7 +84,7 @@ Plug 'fatih/vim-go', {'do': ':GoInstallBinaries'}
 " haskell
 "" Haskell Bundle
 Plug 'eagletmt/neco-ghc'
-Plug 'dag/vim:s'
+Plug 'dag/vim2hs'
 Plug 'pbrisbin/vim-syntax-shakespeare'
 
 
@@ -99,35 +96,10 @@ Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
 
 
-" javascript
-"" Javascript Bundle
-Plug 'jelera/vim-javascript-syntax'
-
-
 " python
 "" Python Bundle
 Plug 'davidhalter/jedi-vim'
 Plug 'raimon49/requirements.txt.vim', {'for': 'requirements'}
-
-
-" rust
-" Vim racer
-Plug 'racer-rust/vim-racer'
-
-" Rust.vim
-Plug 'rust-lang/rust.vim'
-
-" Async.vim
-Plug 'prabirshrestha/async.vim'
-
-" Vim lsp
-Plug 'prabirshrestha/vim-lsp'
-
-" Asyncomplete.vim
-Plug 'prabirshrestha/asyncomplete.vim'
-
-" Asyncomplete lsp.vim
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
 
 
 " svelte
@@ -149,8 +121,8 @@ Plug 'leafOfTree/vim-vue-plugin'
 "*****************************************************************************
 
 "" Include user's extra bundle
-if filereadable(expand("~/.rc.local.bundles"))
-  source ~/.rc.local.bundles
+if filereadable(expand("~/.config/nvim/local_bundles.vim"))
+  source ~/.config/nvim/local_bundles.vim
 endif
 
 call plug#end()
@@ -198,7 +170,7 @@ else
 endif
 
 " session management
-let g:session_directory = "~/./session"
+let g:session_directory = "~/.config/nvim/session"
 let g:session_autoload = "no"
 let g:session_autosave = "no"
 let g:session_command_aliases = 1
@@ -579,16 +551,6 @@ autocmd Filetype haskell setlocal omnifunc=necoghc#omnifunc
 autocmd Filetype html setlocal ts=2 sw=2 expandtab
 
 
-" javascript
-let g:javascript_enable_domhtmlcss = 1
-
-" vim-javascript
-augroup vimrc-javascript
-  autocmd!
-  autocmd FileType javascript setl tabstop=4|setl shiftwidth=4|setl expandtab softtabstop=4
-augroup END
-
-
 " python
 " vim-python
 augroup vimrc-python
@@ -620,14 +582,6 @@ let g:airline#extensions#virtualenv#enabled = 1
 let python_highlight_all = 1
 
 
-" rust
-" Vim racer
-au FileType rust nmap gd <Plug>(rust-def)
-au FileType rust nmap gs <Plug>(rust-def-split)
-au FileType rust nmap gx <Plug>(rust-def-vertical)
-au FileType rust nmap <leader>gd <Plug>(rust-doc)
-
-
 " typescript
 let g:yats_host_keyword = 1
 
@@ -637,7 +591,7 @@ let g:yats_host_keyword = 1
 let g:vim_svelte_plugin_load_full_syntax = 1
 
 
-:q" vuejs
+" vuejs
 " vim vue
 let g:vue_disable_pre_processors=1
 " vim vue plugin
@@ -648,8 +602,8 @@ let g:vim_vue_plugin_load_full_syntax = 1
 "*****************************************************************************
 
 "" Include user's local vim config
-if filereadable(expand("~/.rc.local"))
-  source ~/.rc.local
+if filereadable(expand("~/.config/nvim/local_init.vim"))
+  source ~/.config/nvim/local_init.vim
 endif
 
 "*****************************************************************************
@@ -691,3 +645,4 @@ else
   let g:airline_symbols.readonly = ''
   let g:airline_symbols.linenr = ''
 endif
+
